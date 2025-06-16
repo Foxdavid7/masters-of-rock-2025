@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masters of Rock 2025 - Timeline</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' gc.zgo.at foxdavid7.goatcounter.com; connect-src 'self' gc.zgo.at foxdavid7.goatcounter.com;">
     <style>
         * {
             margin: 0;
@@ -144,6 +143,7 @@
             scroll-margin-top: 20px;
         }
 
+        /* Update counter container styles */
         .counter-container {
             width: 100%;
             display: flex;
@@ -154,30 +154,21 @@
         }
 
         .visitor-stats {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.8);
+            max-width: 800px;  /* Same as .stages max-width */
+            width: 100%;
+            background: #333;
             padding: 10px 15px;
             border-radius: 5px;
             color: white;
             font-size: 0.9em;
-            z-index: 1000;
+            text-align: center;
         }
 
-        .visitor-stats a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .visitor-stats img {
-            display: none;
-        }
-
-        .counter-container {
-            display: none;
+        #visit-counter {
+            min-height: 20px;
         }
     </style>
+    <script src="https://cdn.counter.dev/script.js" data-id="8a74fefb-ac3c-4607-824f-2c0db438faba" data-utcoffset="2"></script>
 </head>
 <body>
     <div class="header">
@@ -840,6 +831,7 @@
             firstDay.style.display = 'block';
             document.querySelector('[data-date="10"]').classList.add('active');
             scrollToCurrentTime();
+            updateVisitorCount();
         });
 
         // Update day display and run progress update
@@ -866,21 +858,9 @@
 
     <!-- Add this before closing </body> tag -->
     <div class="counter-container">
-        <div class="visitor-stats"></div>
+        <div class="visitor-stats">
+            <div id="visit-counter"></div>
+        </div>
     </div>
-
-    <script>
-        var t = setInterval(function() {
-            if (window.goatcounter && window.goatcounter.visit_count) {
-                clearInterval(t);
-                window.goatcounter.visit_count({
-                    append: '.visitor-stats',
-                    no_style: true
-                });
-            }
-        }, 100);
-    </script>
-    <script data-goatcounter="https://foxdavid7.goatcounter.com/count"
-            src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
