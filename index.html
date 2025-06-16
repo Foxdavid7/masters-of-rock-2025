@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masters of Rock 2025 - Timeline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .date-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .date-btn {
+            padding: 10px 20px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .date-btn.active {
+            background: #e74c3c;
+        }
+
+        .stages {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .stage {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .band {
+            background: #333;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .band-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-stage .band-info {
+            align-items: flex-start;
+        }
+
+        .second-stage .band-info {
+            align-items: flex-end;
+        }
+
+        .time {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .name {
+            font-size: 1.1em;
+        }
+
+        .subtitle {
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        .second-stage {
+            text-align: right;
+        }
+
+        .band.current {
+            background: #e74c3c;
+            font-weight: bold;
+        }
+
+        .band.current .time {
+            color: #fff;
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background-color: #4CAF50;
+            transition: width 1s;
+            width: 0%;
+        }
+
+        .band.current .progress-bar {
+            background-color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .stages {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .band {
+                flex-direction: column;
+                text-align: center;
+                gap: 5px;
+            }
+        }
+
+        /* Add these styles to enable smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .stages {
+            scroll-margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Masters of Rock 2025</h1>
+        <p>10.-13.7.2025</p>
+    </div>
+
+    <div class="date-selector">
+        <button class="date-btn" data-date="10">10.7. (Čt)</button>
+        <button class="date-btn" data-date="11">11.7. (Pá)</button>
+        <button class="date-btn" data-date="12">12.7. (So)</button>
+        <button class="date-btn" data-date="13">13.7. (Ne)</button>
+    </div>
+
+    <!-- Day 1 - Thursday 10.07.2025 -->
+    <div class="stages" id="day10">
+        <div class="stage">
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">12:00 - 12:45</div>
+                    <div class="name">Sebastien</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">13:00 - 13:45</div>
+                    <div class="name">Metalite</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">14:00 - 14:45</div>
+                    <div class="name">ALDABRA</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">14:00 - 14:50</div>
+                    <div class="name">Orphaned Land</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">15:05 - 15:50</div>
+                    <div class="name">SALIERI</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">15:10 - 16:05</div>
+                    <div class="name">VARG</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">16:15 - 17:00</div>
+                    <div class="name">EMREI'S</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">16:25 - 17:25</div>
+                    <div class="name">Rivet Skull</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">17:25 - 18:10</div>
+                    <div class="name">MY PROJECT</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">17:45 - 18:45</div>
+                    <div class="name">Citron</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">18:35 - 19:20</div>
+                    <div class="name">VANGUARD</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">19:20 - 20:30</div>
+                    <div class="name">Rhapsody of Fire</div>
+                    <div class="subtitle">Filharmonie B. Martinů Zlín</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">19:45 - 20:30</div>
+                    <div class="name">Landscape of Shadows</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">20:55 - 21:40</div>
+                    <div class="name">ARCHEONIC</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">21:05 - 22:30</div>
+                    <div class="name">Dragonforce</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">22:05 - 22:50</div>
+                    <div class="name">NECNON MORTUSS</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">23:00 - 0:30</div>
+                    <div class="name">Apocalyptica</div>
+                    <div class="subtitle">Plays Metallica</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">23:15 - 00:00</div>
+                    <div class="name">DONOR</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">0:50 - 2:00</div>
+                    <div class="name">Pain</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Day 2 - Friday 11.07.2025 -->
+    <div class="stages" id="day11" style="display: none;">
+        <div class="stage">
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">10:50 - 11:40</div>
+                    <div class="name">Raxar</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">11:55 - 12:45</div>
+                    <div class="name">Hurricane On Saturn</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">13:00 - 13:50</div>
+                    <div class="name">Methedras</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">14:00 - 14:45</div>
+                    <div class="name">ARCH OF HELL</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">14:05 - 14:55</div>
+                    <div class="name">Illumishade</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">15:05 - 15:50</div>
+                    <div class="name">B. BASIKOVÁ & PAČESS</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">15:15 - 16:15</div>
+                    <div class="name">Kanonenfieber</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">16:15 - 17:00</div>
+                    <div class="name">FÉNIX</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">16:35 - 17:35</div>
+                    <div class="name">Dartagnan</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">17:25 - 18:10</div>
+                    <div class="name">Y.B.C.A</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">17:55 - 18:55</div>
+                    <div class="name">Van Canto</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">18:35 - 19:20</div>
+                    <div class="name">GANZI GUN</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">19:25 - 20:35</div>
+                    <div class="name">Soulfly</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">19:45 - 20:30</div>
+                    <div class="name">WARNING VISION</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">20:55 - 21:40</div>
+                    <div class="name">CRIPPLED FINGERS</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">21:05 - 22:15</div>
+                    <div class="name">Lita Ford</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">22:05 - 22:50</div>
+                    <div class="name">HAND GRENADE</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">23:00 - 0:30</div>
+                    <div class="name">Till Lindemann</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">23:15 - 00:00</div>
+                    <div class="name">GROG</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">1:00 - 2:00</div>
+                    <div class="name">Septicflesh</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Day 3 - Saturday 12.07.2025 -->
+    <div class="stages" id="day12" style="display: none;">
+        <div class="stage">
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">10:00 - 10:40</div>
+                    <div class="name">Dark Gamballe</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">10:50 - 11:40</div>
+                    <div class="name">Secret rule</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">11:55 - 12:45</div>
+                    <div class="name">Doga</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">13:00 - 13:50</div>
+                    <div class="name">Temperance</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">14:00 - 14:45</div>
+                    <div class="name">RIMORTIS</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">14:05 - 14:55</div>
+                    <div class="name">League of Distortion</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">15:05 - 15:50</div>
+                    <div class="name">RASMANE</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">15:15 - 16:15</div>
+                    <div class="name">Dragonland</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">16:15 - 17:00</div>
+                    <div class="name">PEFR JAM</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">16:35 - 17:35</div>
+                    <div class="name">Burning Witches</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">17:25 - 18:10</div>
+                    <div class="name">CARPATIA CASTLE</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">18:05 - 19:05</div>
+                    <div class="name">Me and That Man</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">18:35 - 19:20</div>
+                    <div class="name">ROSA NOCTURNA</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">19:35 - 20:45</div>
+                    <div class="name">Gloryhammer</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">19:45 - 20:30</div>
+                    <div class="name">KRYPTOR</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">20:55 - 21:40</div>
+                    <div class="name">RISSLA</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">21:15 - 22:30</div>
+                    <div class="name">Floor Jansen</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">22:05 - 22:50</div>
+                    <div class="name">EWENAY</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">23:00 - 0:30</div>
+                    <div class="name">Hammerfall</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">23:15 - 00:00</div>
+                    <div class="name">ZODIAC</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">1:00 - 2:00</div>
+                    <div class="name">Ryujin</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Day 4 - Sunday 13.07.2025 -->
+    <div class="stages" id="day13" style="display: none;">
+        <div class="stage">
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">10:00 - 10:45</div>
+                    <div class="name">Forrest Jump</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">10:50 - 11:45</div>
+                    <div class="name">MOON SHOT</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">12:00 - 12:50</div>
+                    <div class="name">Shredhead</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">13:05 - 13:55</div>
+                    <div class="name">Nachtblut</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">14:00 - 14:45</div>
+                    <div class="name">CONDEMNED AD</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">14:15 - 15:15</div>
+                    <div class="name">Herman Frank</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">15:05 - 15:50</div>
+                    <div class="name">ANGELCRYPT</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">15:35 - 16:35</div>
+                    <div class="name">Crownshift</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">16:15 - 17:00</div>
+                    <div class="name">FREE FALL</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">16:55 - 18:10</div>
+                    <div class="name">Warkings</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">17:25 - 18:10</div>
+                    <div class="name">PRESSURE POINTS</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">18:35 - 19:20</div>
+                    <div class="name">ALIA TEMPORA</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">18:55 - 20:10</div>
+                    <div class="name">Korpiklaani</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">19:45 - 20:30</div>
+                    <div class="name">SILENTIUM</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">20:55 - 21:40</div>
+                    <div class="name">VANAHEIM</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">20:40 - 22:00</div>
+                    <div class="name">The HU</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">22:05 - 22:50</div>
+                    <div class="name">100NA100</div>
+                </div>
+            </div>
+            <div class="band main-stage">
+                <div class="band-info">
+                    <div class="time">22:30 - 0:00</div>
+                    <div class="name">Powerwolf</div>
+                </div>
+            </div>
+            <div class="band second-stage">
+                <div class="band-info">
+                    <div class="time">23:15 - 00:00</div>
+                    <div class="name">NIGHT DREAM</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Test configuration - for testing purposes
+        const TEST_DATE = new Date('2025-07-11'); // Only specify the date
+        const USE_TEST_DATE = true;
+
+        function updateProgress() {
+            let now;
+            if (USE_TEST_DATE) {
+                // Create date with test date but current time
+                const currentTime = new Date();
+                now = new Date(TEST_DATE);
+                now.setHours(currentTime.getHours());
+                now.setMinutes(currentTime.getMinutes());
+                now.setSeconds(currentTime.getSeconds());
+            } else {
+                now = new Date();
+            }
+
+            const currentMonth = now.getMonth() + 1;
+            let currentDate = now.getDate();
+            let currentTime = now.getHours() * 60 + now.getMinutes();
+            
+            // If before 8 AM, consider it still the previous day
+            if (now.getHours() < 8) {
+                currentTime = currentTime + (24 * 60);
+                // Adjust the current date to previous day for comparison
+                const prevDate = new Date(now);
+                prevDate.setDate(prevDate.getDate() - 1);
+                currentDate = prevDate.getDate();
+            }
+
+            document.querySelectorAll('.stages').forEach(dayContainer => {
+                const festivalDays = {
+                    'day10': 10,
+                    'day11': 11,
+                    'day12': 12,
+                    'day13': 13
+                };
+
+                const dayDate = festivalDays[dayContainer.id];
+                
+                dayContainer.querySelectorAll('.band').forEach(band => {
+                    const oldProgress = band.querySelector('.progress-bar');
+                    if (oldProgress) oldProgress.remove();
+
+                    const progress = document.createElement('div');
+                    progress.className = 'progress-bar';
+
+                    // Past days (including previous day if before 8 AM)
+                    if (dayDate < currentDate) {
+                        progress.style.width = '100%';
+                        band.classList.remove('current');
+                        band.appendChild(progress);
+                        return;
+                    }
+
+                    // Current day
+                    if (dayDate === currentDate) {
+                        const timeText = band.querySelector('.time').textContent;
+                        const [startTime, endTime] = timeText.split(' - ');
+                        let [startHours, startMinutes] = startTime.split(':');
+                        let [endHours, endMinutes] = endTime.split(':');
+                        
+                        if (parseInt(startHours) < 8) {
+                            startHours = parseInt(startHours) + 24;
+                        }
+                        if (parseInt(endHours) < 8) {
+                            endHours = parseInt(endHours) + 24;
+                        }
+                        
+                        const bandStartTime = parseInt(startHours) * 60 + parseInt(startMinutes);
+                        const bandEndTime = parseInt(endHours) * 60 + parseInt(endMinutes);
+                        
+                        if (currentTime >= bandStartTime && currentTime < bandEndTime) {
+                            const percentage = ((currentTime - bandStartTime) / (bandEndTime - bandStartTime)) * 100;
+                            progress.style.width = `${percentage}%`;
+                            band.classList.add('current');
+                            band.appendChild(progress);
+                        } else if (currentTime >= bandEndTime) {
+                            progress.style.width = '100%';
+                            band.classList.remove('current');
+                            band.appendChild(progress);
+                        }
+                    }
+                });
+            });
+        }
+
+        // Add this function after existing updateProgress function
+        function scrollToCurrentTime() {
+            const now = USE_TEST_DATE ? TEST_DATE : new Date();
+            const currentDate = now.getDate();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+
+            // Find current day button and click it
+            const dayButtons = document.querySelectorAll('.date-btn');
+            dayButtons.forEach(button => {
+                if (parseInt(button.getAttribute('data-date')) === currentDate) {
+                    button.click();
+                }
+            });
+
+            // Find currently playing band
+            setTimeout(() => {
+                const currentBand = document.querySelector('.band.current');
+                if (currentBand) {
+                    currentBand.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    // If no current band, find next upcoming band
+                    const visibleDay = document.querySelector('.stages[style*="display: block"]');
+                    if (!visibleDay) return;
+
+                    const bands = Array.from(visibleDay.querySelectorAll('.band'));
+                    const nextBand = bands.find(band => {
+                        const timeText = band.querySelector('.time').textContent;
+                        const [startTime] = timeText.split(' - ');
+                        let [hours, minutes] = startTime.split(':');
+                        const bandStartTime = parseInt(hours) * 60 + parseInt(minutes);
+                        return bandStartTime > currentTime;
+                    });
+
+                    if (nextBand) {
+                        nextBand.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            }, 100);
+        }
+
+        // Update the DOMContentLoaded event listener
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstDay = document.getElementById('day10');
+            firstDay.style.display = 'block';
+            document.querySelector('[data-date="10"]').classList.add('active');
+            scrollToCurrentTime();
+        });
+
+        // Update day display and run progress update
+        document.querySelectorAll('.date-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.stages').forEach(day => {
+                    day.style.display = 'none';
+                });
+                
+                document.querySelectorAll('.date-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                const selectedDay = button.getAttribute('data-date');
+                document.getElementById(`day${selectedDay}`).style.display = 'block';
+                button.classList.add('active');
+            });
+        });
+
+        // Start progress updates
+        setInterval(updateProgress, 60000);
+        updateProgress();
+    </script>
+</body>
+</html>
