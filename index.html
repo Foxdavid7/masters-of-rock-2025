@@ -147,7 +147,6 @@
 <body>
     <div class="header">
         <h1>Masters of Rock 2025</h1>
-        <p>10.-13.7.2025</p>
     </div>
 
     <div class="date-selector">
@@ -658,9 +657,9 @@
     </div>
 
     <script>
-        // Test configuration - for testing purposes
-        const TEST_DATE = new Date('2025-07-11'); // Only specify the date
-        const USE_TEST_DATE = true;
+        // Update the test configuration
+        const TEST_DATE = new Date('2025-07-10'); // Only specify the date
+        const USE_TEST_DATE = true; // Set to false to use real time
 
         function updateProgress() {
             let now;
@@ -673,6 +672,14 @@
                 now.setSeconds(currentTime.getSeconds());
             } else {
                 now = new Date();
+            }
+
+            // Check if current date is before festival start (July 10, 2025)
+            const festivalStart = new Date('2025-07-10T08:00:00');
+            if (now < festivalStart) {
+                // Remove all progress bars if before festival
+                document.querySelectorAll('.progress-bar').forEach(bar => bar.remove());
+                return;
             }
 
             const currentMonth = now.getMonth() + 1;
@@ -698,9 +705,15 @@
 
                 const dayDate = festivalDays[dayContainer.id];
                 
+                // Check if we're in festival month and year
+                const isFestivalTime = currentMonth === 7 && now.getFullYear() === 2025;
+                
                 dayContainer.querySelectorAll('.band').forEach(band => {
                     const oldProgress = band.querySelector('.progress-bar');
                     if (oldProgress) oldProgress.remove();
+
+                    // Only proceed if we're in festival time
+                    if (!isFestivalTime) return;
 
                     const progress = document.createElement('div');
                     progress.className = 'progress-bar';
