@@ -142,12 +142,46 @@
         .stages {
             scroll-margin-top: 20px;
         }
+
+        .countdown-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        
+        #countdown-timer {
+            font-size: 4em;
+            font-weight: bold;
+            color: #e74c3c;
+            text-align: center;
+            margin: 10px 0 20px 0;
+        }
+
+        #countdown-timer.hidden {
+            display: none;
+        }
+
+        .credits {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            color: #666;
+            font-size: 0.8em;
+        }
     </style>
     <script src="https://cdn.counter.dev/script.js" data-id="8a74fefb-ac3c-4607-824f-2c0db438faba" data-utcoffset="2"></script>
 </head>
 <body>
+
+    </div>
     <div class="header">
-        <h1>Masters of Rock 2025</h1>
+        <div id="page-header">
+            <h1>Masters of Rock 2025</h1>
+                <div id="countdown" class="countdown-container">
+        <div id="countdown-timer"></div>
+        </div>
     </div>
 
     <div class="date-selector">
@@ -760,13 +794,42 @@
             });
         }
 
-        // Add this function after existing updateProgress function
+        // Update the updateCountdown function
+        function updateCountdown() {
+            const festivalStart = new Date('2025-07-10T12:00:00');
+            const now = USE_TEST_DATE ? TEST_DATE : new Date();
+            const timer = document.getElementById('countdown-timer');
+
+            if (now >= festivalStart) {
+                timer.classList.add('hidden');
+                // Trigger progress update when countdown ends
+                updateProgress();
+                return;
+            }
+
+            const diff = festivalStart - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            timer.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
         function scrollToCurrentTime() {
             const now = USE_TEST_DATE ? TEST_DATE : new Date();
             const currentDate = now.getDate();
-            const currentTime = now.getHours() * 60 + now.getMinutes();
+            let currentTime = now.getHours() * 60 + now.getMinutes();
+            
+            if (now.getHours() < 8) {
+                currentTime = currentTime + (24 * 60);
+                // Adjust current date to previous day if before 8 AM
+                const prevDate = new Date(now);
+                prevDate.setDate(prevDate.getDate() - 1);
+                currentDate = prevDate.getDate();
+            }
 
-            // Find current day button and click it
+            // Find and click the correct day button
             const dayButtons = document.querySelectorAll('.date-btn');
             dayButtons.forEach(button => {
                 if (parseInt(button.getAttribute('data-date')) === currentDate) {
@@ -774,39 +837,62 @@
                 }
             });
 
-            // Find currently playing band
+            // Wait for day switch animation to complete
             setTimeout(() => {
-                const currentBand = document.querySelector('.band.current');
+                const visibleDay = document.querySelector('.stages[style*="display: block"]');
+                if (!visibleDay) return;
+
+                // Find currently playing band
+                const currentBand = visibleDay.querySelector('.band.current');
                 if (currentBand) {
                     currentBand.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                } else {
-                    // If no current band, find next upcoming band
-                    const visibleDay = document.querySelector('.stages[style*="display: block"]');
-                    if (!visibleDay) return;
-
-                    const bands = Array.from(visibleDay.querySelectorAll('.band'));
-                    const nextBand = bands.find(band => {
-                        const timeText = band.querySelector('.time').textContent;
-                        const [startTime] = timeText.split(' - ');
-                        let [hours, minutes] = startTime.split(':');
-                        const bandStartTime = parseInt(hours) * 60 + parseInt(minutes);
-                        return bandStartTime > currentTime;
-                    });
-
-                    if (nextBand) {
-                        nextBand.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
+                    return;
                 }
-            }, 100);
+
+                // If no current band, find next upcoming band
+                const bands = Array.from(visibleDay.querySelectorAll('.band'));
+                const nextBand = bands.find(band => {
+                    const timeText = band.querySelector('.time').textContent;
+                    const [startTime] = timeText.split(' - ');
+                    let [hours, minutes] = startTime.split(':');
+                    
+                    if (parseInt(hours) < 8) {
+                        hours = parseInt(hours) + 24;
+                    }
+                    
+                    const bandStartTime = parseInt(hours) * 60 + parseInt(minutes);
+                    return bandStartTime > currentTime;
+                });
+
+                if (nextBand) {
+                    nextBand.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100); // Small delay to ensure day switch is complete
         }
 
-        // Update the DOMContentLoaded event listener
+        // Add to your DOMContentLoaded event
         document.addEventListener('DOMContentLoaded', () => {
             const firstDay = document.getElementById('day10');
             firstDay.style.display = 'block';
             document.querySelector('[data-date="10"]').classList.add('active');
-            scrollToCurrentTime();
-            updateVisitorCount();
+            updateCountdown();
+            updateProgress();
+            
+            // Update both countdown and progress every second
+            setInterval(() => {
+                updateCountdown();
+                updateProgress();
+            }, 1000);
+            
+            // Simple check if we're during the festival
+            const now = USE_TEST_DATE ? TEST_DATE : new Date();
+            const festivalStart = new Date('2025-07-10T08:00:00');
+            const festivalEnd = new Date('2025-07-14T08:00:00');  // Day after festival ends at 8 AM
+            
+            // Only auto-scroll if we're during festival dates
+            if (now >= festivalStart && now < festivalEnd) {
+                scrollToCurrentTime();
+            }
         });
 
         // Update day display and run progress update
@@ -830,5 +916,6 @@
         setInterval(updateProgress, 60000);
         updateProgress();
     </script>
+    <div class="credits">Created by David Liška with VS Code and Claude Sonnet 3.5</div>
 </body>
 </html>
