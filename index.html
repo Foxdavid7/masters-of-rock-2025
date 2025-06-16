@@ -142,6 +142,40 @@
         .stages {
             scroll-margin-top: 20px;
         }
+
+        .counter-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+            background: #2a2a2a;
+            margin-top: 20px;
+        }
+
+        .visitor-stats {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            font-size: 0.9em;
+            z-index: 1000;
+        }
+
+        .visitor-stats a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .visitor-stats img {
+            display: none;
+        }
+
+        .counter-container {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -656,6 +690,7 @@
         </div>
     </div>
 
+
     <script>
         // Update the test configuration
         const TEST_DATE = new Date('2025-07-10'); // Only specify the date
@@ -827,5 +862,24 @@
         setInterval(updateProgress, 60000);
         updateProgress();
     </script>
+
+    <!-- Add this before closing </body> tag -->
+    <div class="counter-container">
+        <div class="visitor-stats"></div>
+    </div>
+
+    <script>
+        var t = setInterval(function() {
+            if (window.goatcounter && window.goatcounter.visit_count) {
+                clearInterval(t);
+                window.goatcounter.visit_count({
+                    append: '.visitor-stats',
+                    no_style: true
+                });
+            }
+        }, 100);
+    </script>
+    <script data-goatcounter="https://foxdavid7.goatcounter.com/count"
+            src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
