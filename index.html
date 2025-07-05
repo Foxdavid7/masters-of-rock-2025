@@ -818,21 +818,21 @@
 
         function scrollToCurrentTime() {
             const now = USE_TEST_DATE ? TEST_DATE : new Date();
-            const currentDate = now.getDate();
+            let currentDate = now.getDate();
             let currentTime = now.getHours() * 60 + now.getMinutes();
-            
+            let scrollDay = currentDate;
+            // If before 8 AM, consider it still the previous day for festival logic
             if (now.getHours() < 8) {
                 currentTime = currentTime + (24 * 60);
-                // Adjust current date to previous day if before 8 AM
                 const prevDate = new Date(now);
                 prevDate.setDate(prevDate.getDate() - 1);
-                currentDate = prevDate.getDate();
+                scrollDay = prevDate.getDate();
             }
 
             // Find and click the correct day button
             const dayButtons = document.querySelectorAll('.date-btn');
             dayButtons.forEach(button => {
-                if (parseInt(button.getAttribute('data-date')) === currentDate) {
+                if (parseInt(button.getAttribute('data-date')) === scrollDay) {
                     button.click();
                 }
             });
@@ -843,27 +843,31 @@
                 if (!visibleDay) return;
 
                 // Find currently playing band
-                const currentBand = visibleDay.querySelector('.band.current');
+                const currentBand = Array.from(visibleDay.querySelectorAll('.band')).find(band => {
+                    const timeText = band.querySelector('.time').textContent;
+                    const [startTime, endTime] = timeText.split(' - ');
+                    let [startHours, startMinutes] = startTime.split(':');
+                    let [endHours, endMinutes] = endTime.split(':');
+                    if (parseInt(startHours) < 8) startHours = parseInt(startHours) + 24;
+                    if (parseInt(endHours) < 8) endHours = parseInt(endHours) + 24;
+                    const bandStartTime = parseInt(startHours) * 60 + parseInt(startMinutes);
+                    const bandEndTime = parseInt(endHours) * 60 + parseInt(endMinutes);
+                    return currentTime >= bandStartTime && currentTime < bandEndTime;
+                });
                 if (currentBand) {
                     currentBand.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     return;
                 }
-
                 // If no current band, find next upcoming band
                 const bands = Array.from(visibleDay.querySelectorAll('.band'));
                 const nextBand = bands.find(band => {
                     const timeText = band.querySelector('.time').textContent;
                     const [startTime] = timeText.split(' - ');
                     let [hours, minutes] = startTime.split(':');
-                    
-                    if (parseInt(hours) < 8) {
-                        hours = parseInt(hours) + 24;
-                    }
-                    
+                    if (parseInt(hours) < 8) hours = parseInt(hours) + 24;
                     const bandStartTime = parseInt(hours) * 60 + parseInt(minutes);
                     return bandStartTime > currentTime;
                 });
-
                 if (nextBand) {
                     nextBand.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
